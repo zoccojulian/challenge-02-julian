@@ -4,6 +4,19 @@ let palabraNueva = document.querySelector("#input-nueva-palabra");
 let error = document.querySelector("#error");
 let repetida = document.querySelector("#repetida");
 
+/*Lista de palabras */
+let listaPalabras = ["ALURA","ORACLE","CARTERA","MUSICA","COCODRILO","TELEFONO","ESGRIMA","COMPUTADORA",
+    "PARRILLA","VACACIONES","AMERICA","ELECTRICIDAD","COMPETICION","GUITARRA","BATERIA","PALINDROMO",
+    "ESTATUA","MARADONA","PERDIDA","TELEVISOR","PLASTICOLA","ZAPATILLA","JOROBA","ALCOHOL","CARACOL",
+    "ARGENTINA","CELULAR"];
+
+/*Chequea que las localStorage no este creada. Si esta creada la levanta, sino la crea */
+if(!localStorage.getItem("listaDePalabras")){
+    localStorage.setItem("listaDePalabras",JSON.stringify(listaPalabras));
+}else{
+listaPalabras = JSON.parse(localStorage.getItem("listaDePalabras"))
+}
+console.log(listaPalabras);
 document.querySelector(".titulo").scrollIntoView({block: "start", behavior: "smooth"});
 
 var letrasErradas = []; //Array donde se van guardando las letras equivocadas
@@ -18,6 +31,7 @@ function comenzar(event){
     palabraNueva.value="";
     jugar.blur(); //Saca el foco del botón. Para que no se acciones con la barra espaciadora.
     palabra = listaPalabras[Math.floor(Math.random()*listaPalabras.length)]
+
     /*Inicia las variables en cero para cuando volves a empezar a jugar*/ 
     letrasErradas = [];
     letrasEncontradas = [];
@@ -91,7 +105,7 @@ function finDelJuego(){
 agregarPalabra.addEventListener("click",function(event){
     let palabraIngresada = palabraNueva.value.toLocaleUpperCase();
 
-    if (!validarPalabraNueva(palabraIngresada)){
+    if ((!validarPalabraNueva(palabraIngresada)) || (palabraIngresada == "")){
         error.classList.remove("invisible");
         palabraNueva.focus();
         setTimeout(function(){
@@ -107,9 +121,10 @@ agregarPalabra.addEventListener("click",function(event){
             },2000);
         }else{
             listaPalabras.push(palabraIngresada);
-                agregada.classList.remove("invisible");
+            localStorage.setItem("listaDePalabras",JSON.stringify(listaPalabras));
+            agregada.classList.remove("invisible");
             setTimeout(function(){
-                agregada.classList.add("invisible");
+            agregada.classList.add("invisible");
             },2000);
             palabraNueva.value="";
         }
