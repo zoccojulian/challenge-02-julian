@@ -16,7 +16,7 @@ if(!localStorage.getItem("listaDePalabras")){
 }else{
 listaPalabras = JSON.parse(localStorage.getItem("listaDePalabras"))
 }
-console.log(listaPalabras);
+
 document.querySelector(".titulo").scrollIntoView({block: "start", behavior: "smooth"});
 
 var letrasErradas = []; //Array donde se van guardando las letras equivocadas
