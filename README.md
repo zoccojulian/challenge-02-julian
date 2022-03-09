@@ -1,4 +1,4 @@
-# JUEGO DEL AHORCADO / Challenge 2 Alura Latam
+# JUEGO DEL AHORCADO / Challenge 2 AluraLatam
 
 Desafío 12 del programa Oracle One - Alura Latam.
 
